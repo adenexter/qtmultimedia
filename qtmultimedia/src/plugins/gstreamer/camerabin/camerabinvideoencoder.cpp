@@ -159,19 +159,23 @@ QPair<int,int> CameraBinVideoEncoder::rateAsRational(qreal frameRate) const
 
 GstEncodingProfile *CameraBinVideoEncoder::createProfile()
 {
-    QString codec = m_actualVideoSettings.codec();
+    QString codec;// = m_actualVideoSettings.codec();
     GstCaps *caps;
 
-    if (codec.isEmpty())
-        caps = gst_caps_new_any();
-    else
+    if (codec.isEmpty()) {
+        qDebug() << "codec is empty";
+//        caps = gst_caps_new_any();
+        caps = gst_caps_from_string("video/mpeg, mpegversion=(int)4");
+    } else {
+        qDebug() << "codec is not empty" << codec;
         caps = gst_caps_from_string(codec.toLatin1());
+    }
 
     return (GstEncodingProfile *)gst_encoding_video_profile_new(
                 caps,
                 NULL, //preset
                 NULL, //restriction
-                0); //presence
+                1); //presence
 }
 
 QT_END_NAMESPACE

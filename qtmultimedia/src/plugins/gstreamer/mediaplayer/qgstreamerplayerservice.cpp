@@ -147,8 +147,9 @@ QMediaControl *QGstreamerPlayerService::requestControl(const char *name)
     if (!m_videoOutput) {
         if (qstrcmp(name, QVideoRendererControl_iid) == 0)
             m_videoOutput = m_videoRenderer;
-        else if (qstrcmp(name, QGStreamerVideoSinkControl_iid) == 0)
-            m_videoOutput = new QGStreamerVideoSinkControl(this);
+        else if (qstrcmp(name, QGStreamerVideoSinkControl_iid) == 0) {
+            qDebug() << Q_FUNC_INFO << "GStreamerVideoSinkControl";
+            m_videoOutput = new QGStreamerVideoSinkControl(this); }
 #if defined(HAVE_XVIDEO) && defined(HAVE_WIDGETS)
         else if (qstrcmp(name, QVideoWidgetControl_iid) == 0)
             m_videoOutput = m_videoWidget;

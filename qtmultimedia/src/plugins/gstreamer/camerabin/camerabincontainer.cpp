@@ -103,9 +103,18 @@ GstEncodingContainerProfile *CameraBinContainer::createProfile()
 {
     GstCaps *caps;
 
+    m_actualFormat = QByteArray();
     if (m_actualFormat.isEmpty()) {
-        caps = gst_caps_new_any();
+        qDebug() << "Container format is empty";
+//        caps = gst_caps_new_any();
+//        caps = gst_caps_from_string("video/quicktime,variant=(string)iso");
+        caps = gst_caps_from_string("video/quicktime");
+//        caps = gst_caps_from_string("video/x-flv");
+//        caps = gst_caps_from_string("video/x-matroska");
+//        caps = gst_caps_from_string("video/webm");
+
     } else {
+        qDebug() << "Format is not empty" << m_actualFormat;
         QString format = m_actualFormat;
         QStringList supportedFormats = m_supportedContainers.supportedCodecs();
 

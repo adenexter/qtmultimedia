@@ -180,7 +180,6 @@ private:
     static void playbinNotifySource(GObject *o, GParamSpec *p, gpointer d);
     static void handleVolumeChange(GObject *o, GParamSpec *p, gpointer d);
     static void handleMutedChange(GObject *o, GParamSpec *p, gpointer d);
-    static void insertColorSpaceElement(GstElement *element, gpointer data);
     static void handleElementAdded(GstBin *bin, GstElement *element, QGstreamerPlayerSession *session);
     static void handleStreamsChange(GstBin *bin, gpointer user_data);
     static GstAutoplugSelectResult handleAutoplugSelect(GstBin *bin, GstPad *pad, GstCaps *caps, GstElementFactory *factory, QGstreamerPlayerSession *session);
@@ -202,10 +201,6 @@ private:
     QGstreamerBusHelper* m_busHelper;
     GstElement* m_playbin;
 
-    GstElement* m_videoOutputBin;
-    GstElement* m_videoIdentity;
-    GstElement* m_colorSpace;
-    bool m_usingColorspaceElement;
     GstElement* m_videoSink;
     GstElement* m_pendingVideoSink;
     GstElement* m_nullVideoSink;

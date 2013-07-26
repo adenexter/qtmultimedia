@@ -49,6 +49,8 @@
 #endif
 
 
+#include <QDebug>
+
 QGstCodecsInfo::QGstCodecsInfo(QGstCodecsInfo::ElementType elementType)
 {
 
@@ -68,6 +70,11 @@ QGstCodecsInfo::QGstCodecsInfo(QGstCodecsInfo::ElementType elementType)
     }
 
     GstCaps *allCaps = supportedElementCaps(gstElementType);
+
+    gchar* str = gst_caps_to_string(allCaps);
+    qDebug() << "CAPS" << elementType << str;
+    g_free(str);
+
     GstCaps *caps = gst_caps_new_empty();
 
     uint codecsCount = gst_caps_get_size(allCaps);

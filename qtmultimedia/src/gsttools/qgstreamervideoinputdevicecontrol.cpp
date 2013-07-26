@@ -111,6 +111,15 @@ void QGstreamerVideoInputDeviceControl::update()
     m_names << QLatin1String("primary") << QLatin1String("secondary");
     m_descriptions << tr("Main camera") << tr("Front camera");
 #else
+    QByteArray envDevices = qgetenv("QT_GSTREAMER_CAMERA_DEVICES");
+    if (!envDevices.isEmpty()) {
+        foreach (const QByteArray &device, envDevices.split(':')) {
+            m_names << device;
+            m_descriptions << device;
+        }
+        return;
+    }
+
     QDir devDir("/dev");
     devDir.setFilter(QDir::System);
 
